@@ -19,6 +19,14 @@ def brute_force(values, target):
                 return i, j
     return None
 
+def hash_map(values, target):
+      seen = {}  
+      for i, n in enumerate(values):
+          complement = target - n
+          if complement in seen:  
+              return seen[complement], i
+          seen[x] = j
+      return None
 
 if __name__ == "__main__":
     values = load_data(10)
