@@ -3,3 +3,4 @@ GreenIT_data
 .codeboarding
 .env
 cesi-env
+*.csv
