@@ -4,3 +4,4 @@ GreenIT_data
 .env
 cesi-env
 *.csv
+task_intervals_instances/
