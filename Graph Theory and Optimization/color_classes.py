@@ -15,10 +15,28 @@ def load_tasks(n):
 def available_instances():
     return sorted(int(p.stem.split("_")[-1]) for p in DATA_DIR.glob("task_intervals_*.csv"))
 
+
+def overlaps(a, b):
+    """a and b are (start, end) tuples. Return True if they overlap."""
+    a_start, a_end = a
+    b_start, b_end = b
+    return a_start < b_end and b_start < a_end
+
+
+def build_graph(tasks):
+    """Return {task: set of tasks it overlaps with}."""
+    graph = {task: set() for task in tasks}
+    names = list(tasks)
+    for i in range(len(names)):
+        for j in range(i + 1, len(names)):
+            a, b = names[i], names[j]
+            if overlaps(tasks[a], tasks[b]):
+                graph[a].add(b)
+                graph[b].add(a)
+    return graph
+
 # test suite
 if __name__ == "__main__":
-    for n in available_instances():
-        tasks = load_tasks(n)
-        print(f"task_intervals_{n}.csv -> {len(tasks)} tasks")
-        for task, (start, end) in tasks.items():
-            print(f"  {task}: {start} -> {end}")
+    graph = build_graph(load_tasks(1))
+    for task, neighbors in graph.items():
+        print(task, "->", sorted(neighbors))
