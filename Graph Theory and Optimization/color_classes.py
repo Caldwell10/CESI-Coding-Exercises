@@ -35,8 +35,44 @@ def build_graph(tasks):
                 graph[b].add(a)
     return graph
 
+
+def lex_bfs(graph):
+    """Return the vertices in Lexicographic BFS order.
+
+    Each unvisited vertex carries a label (a list of numbers). When a vertex is
+    visited it gets the next number (n, n-1, ..., 1), which is appended to the
+    label of each unvisited neighbor. The next vertex visited is always the one
+    with the lexicographically largest label.
+    """
+    labels = {v: [] for v in graph}
+    order = []
+    number = len(graph)
+    while labels:
+        v = max(labels, key=lambda u: labels[u])
+        del labels[v]
+        order.append(v)
+        for neighbor in graph[v]:
+            if neighbor in labels:
+                labels[neighbor].append(number)
+        number -= 1
+    return order
+
+
+def is_safe_order(graph, order):
+    """Check that each vertex's already-visited neighbors form a clique."""
+    seen = set()
+    for v in order:
+        earlier = graph[v] & seen
+        for a in earlier:
+            if not (earlier - {a}) <= graph[a]:
+                return False
+        seen.add(v)
+    return True
+
 # test suite
 if __name__ == "__main__":
-    graph = build_graph(load_tasks(1))
-    for task, neighbors in graph.items():
-        print(task, "->", sorted(neighbors))
+    for n in available_instances():
+        graph = build_graph(load_tasks(n))
+        order = lex_bfs(graph)
+        print(f"task_intervals_{n}.csv -> safe: {is_safe_order(graph, order)}")
+        print("  ", " ".join(order))
