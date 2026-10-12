@@ -5,3 +5,4 @@ GreenIT_data
 cesi-env
 *.csv
 task_intervals_instances/
+__pycache__
