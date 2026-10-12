@@ -1,5 +1,6 @@
 from checker import verify
-# graph displaying Hamiltonian cycle
+
+# Graph displaying Hamiltonian cycle
 Ham = {
     "A" : {"B" , "D" },
     "B" : { "A" , "C"},
