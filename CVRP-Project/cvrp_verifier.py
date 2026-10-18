@@ -20,7 +20,7 @@ def test_tsp_to_cvrp_reduction():
     tsp_cost = cvrp_checker.cost
 
     # TSP tour 0 -> 1 -> 2 -> 3 -> 4 -> 0
-    # cost by hand: 10 + 12 + 14 + 8 + 25 = 69
+    
     tests = [
         ([[1, 2, 3, 4]],     69, True,  "tour within K"),
         ([[1, 2, 3, 4]],     68, False, "tour over K"),
