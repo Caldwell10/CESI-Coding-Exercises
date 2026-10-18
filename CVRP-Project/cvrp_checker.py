@@ -13,9 +13,9 @@ demand = {
 
 }
 cost = {
-   0 :  {1 : 10, 2: 15, 3 : 20, 4 : 25},
+   0 : {1 : 10, 2: 15, 3 : 20, 4 : 25},
    1 : {0: 10, 2: 12, 3:30, 4: 18},
-   2 :  {0: 15, 1: 12, 3: 14, 4 : 22},
+   2 : {0: 15, 1: 12, 3: 14, 4 : 22},
    3 : {0: 20, 1: 30, 2: 14, 4: 8},
    4 : {0: 25, 1: 18, 2: 22, 3:8 }
 }
@@ -23,6 +23,9 @@ cost = {
 K_cost = 90 # maximum allowed total cost
 
 def verify_cvrp(depot, customers, demand, cost, num_vehicles, Q, K_cost, routes):
+    if len(routes) > num_vehicles:
+        return False
+    
     valid_customer = set(customers) # every customer who exists
     seen = set() # grows as routes are traversed
 
@@ -36,18 +39,27 @@ def verify_cvrp(depot, customers, demand, cost, num_vehicles, Q, K_cost, routes)
 
             if load > Q:
                 return False
-            
-
-            
         
-            
-
-    if len(routes) > num_vehicles:
+    
+    if len(seen) != len(valid_customer):
         return False
     
+    total = 0
+    
+    for route in routes:
+        prev = depot # truck is in the depot
+        for customer in route:  
+            total += cost[prev][customer]
+            prev = customer
+        
+        total = total + cost[prev][depot]
+
+    if total > K_cost: # cost check
+        return False
+
     return True
 
-
+# test function
 def test_verify_cvrp():
     tests = [
         ([[1, 2], [3, 4]],     90,  True,  "valid solution"),
