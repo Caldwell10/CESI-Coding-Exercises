@@ -159,7 +159,6 @@ def print_servers(n):
         slots = "  ".join(f"{t}({tasks[t][0]}-{tasks[t][1]})" for t in names)
         print(f"  server {color:>2} | {slots}")
 
-
 # python3 color_classes.py      -> summary table for every instance
 # python3 color_classes.py 10   -> server assignment for task_intervals_10.csv
 if __name__ == "__main__":

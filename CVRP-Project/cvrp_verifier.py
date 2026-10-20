@@ -3,7 +3,6 @@ import cvrp_checker
 
 
 def tsp_to_cvrp_reduction(cities, tsp_cost, K):
-    
     depot = cities[0]
     customers = [city for city in cities if city!= depot ]
     demand = {city: 1 for city in customers } # set each customer demand as 1
@@ -20,7 +19,7 @@ def test_tsp_to_cvrp_reduction():
     tsp_cost = cvrp_checker.cost
 
     # TSP tour 0 -> 1 -> 2 -> 3 -> 4 -> 0
-    
+
     tests = [
         ([[1, 2, 3, 4]],     69, True,  "tour within K"),
         ([[1, 2, 3, 4]],     68, False, "tour over K"),
