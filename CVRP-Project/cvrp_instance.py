@@ -3,9 +3,9 @@
 import numpy as np
 
 # measure distance between points
-def distance_matrix(coords):
+def distance_matrix(coords): 
     n = len(coords)
-    dist = np.zeros((n, n ))
+    dist = np.zeros((n, n))
 
     # visit every pair of points
     for i in range(n):
@@ -17,6 +17,5 @@ def distance_matrix(coords):
 
     return dist
 
-
-    
+print(distance_matrix([(0, 0), (3, 0), (0, 4)]))
     
