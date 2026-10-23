@@ -17,5 +17,10 @@ def distance_matrix(coords):
 
     return dist
 
-print(distance_matrix([(0, 0), (3, 0), (0, 4)]))
-    
+def generate_instance(n_customers, Q, seed):
+    rng=np.random.default_rng(seed)
+    coords = rng.uniform(0 , 100 , size = (n_customers + 1, 2))
+
+    return coords
+
+print(generate_instance(5, 15, 42))
