@@ -18,9 +18,14 @@ def distance_matrix(coords):
     return dist
 
 def generate_instance(n_customers, Q, seed):
+    # generate random coordinates within a range
     rng=np.random.default_rng(seed)
     coords = rng.uniform(0 , 100 , size = (n_customers + 1, 2))
+    depot = 0
+    customers = list((range(1, n_customers + 1))) # starts at 1 and ends at exactly the last number
+    demand = {c: rng.integers(1, 11) for c in customers}
 
-    return coords
+    return coords, depot, customers, demand
 
 print(generate_instance(5, 15, 42))
+
