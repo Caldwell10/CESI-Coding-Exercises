@@ -1,6 +1,7 @@
 """optimize algorithm by creating random cvrp instances"""
 
 import numpy as np
+import math 
 
 # measure distance between points
 def distance_matrix(coords): 
@@ -24,8 +25,9 @@ def generate_instance(n_customers, Q, seed):
     depot = 0
     customers = list((range(1, n_customers + 1))) # starts at 1 and ends at exactly the last number
     demand = {c: rng.integers(1, 11) for c in customers}
+    num_vehicles = math.ceil(sum(demand.values()) / Q)
 
-    return coords, depot, customers, demand
+    return coords, depot, customers, demand,num_vehicles
 
 print(generate_instance(5, 15, 42))
 
