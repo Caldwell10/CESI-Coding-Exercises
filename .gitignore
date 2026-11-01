@@ -6,3 +6,5 @@ cesi-env
 *.csv
 task_intervals_instances/
 __pycache__
+
+CVRP-Project/Project Modeling Deliverable.ipynb
