@@ -1,9 +1,9 @@
-from cvrp_instance import generate_instance, customers
+from cvrp_instance import generate_instance
 import matplotlib.pyplot as plt
 
 def plot_instance(coords):
     plt.scatter(coords[1:, 0], coords[1:, 1], color="blue", label="Customers") # customers
-    plt.scatter(coords[0,0], coords[1: 1], color="red", marker="s", s=100, label="Depot") # depot
+    plt.scatter(coords[0,0], coords[0: 1], color="red", marker="s", s=100, label="Depot") # depot
 
     for i in range(1, len(coords)):
         plt.annotate(str[i], coords[i, 0], coords[i, 1])
