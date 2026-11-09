@@ -30,9 +30,23 @@ def generate_instance(n_customers, Q, seed):
 
     return coords, depot, customers, demand,num_vehicles, cost
 
-coords, depot, customers, demand, num_vehicles, cost = generate_instance(5, 15, 42)
+def generate_time_windows(cost, depot, customers, seed, width=60, horizon=300, service_time=10):
+    rng = np.random.default_rng(seed + 1) # different random numbers from the coordinates
+    earliest = {}
+    latest = {}
+    service = {}
+
+    for c in customers:
+        travel = cost[depot][c]  # earliest possible arrival straight from depot
+        start = rng.uniform(travel, horizon-width)
+        earliest[c] = start
+        latest[c] = start + width
+        service[c] = service_time
+        
+    return earliest, latest, service 
 
 if __name__ == "__main__":
+    coords, depot, customers, demand, num_vehicles, cost = generate_instance(5, 15, 42)
     print(cost.shape)
     print(cost)
     print(cost[1][2])
