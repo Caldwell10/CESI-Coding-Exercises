@@ -1,3 +1,4 @@
-from cvrp_instance import coords
-import matplotlib as plt
+from cvrp_instance import generate_instance
+import matplotlib.pyplot as plt
 
+def plot_instance(coords):
