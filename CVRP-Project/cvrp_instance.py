@@ -30,11 +30,12 @@ def generate_instance(n_customers, Q, seed):
 
     return coords, depot, customers, demand,num_vehicles, cost
 
-
 coords, depot, customers, demand, num_vehicles, cost = generate_instance(5, 15, 42)
-print(cost.shape)
-print(cost)
-print(cost[1][2])
+
+if __name__ == "__main__":
+    print(cost.shape)
+    print(cost)
+    print(cost[1][2])
 
 
 
