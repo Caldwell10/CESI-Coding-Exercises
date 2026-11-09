@@ -22,6 +22,18 @@ cost = {
 
 K_cost = 90 # maximum allowed total cost
 
+def total_cost(routes, depot, cost):
+    total = 0 
+    for route in routes:
+        prev = depot # every truck starts at the depot 
+        for customer in route:
+            total += cost[prev][customer]
+            prev = customer
+        total += cost[prev][depot] # drive back to the depot
+    
+    return total 
+
+
 def verify_cvrp(depot, customers, demand, cost, num_vehicles, Q, K_cost, routes):
     if len(routes) > num_vehicles:
         return False
@@ -44,15 +56,7 @@ def verify_cvrp(depot, customers, demand, cost, num_vehicles, Q, K_cost, routes)
     if len(seen) != len(valid_customer):
         return False
     
-    total = 0
-    
-    for route in routes:
-        prev = depot # truck is in the depot
-        for customer in route:  
-            total += cost[prev][customer]
-            prev = customer
-        
-        total = total + cost[prev][depot]
+    total = total_cost(routes, depot, cost)
 
     if total > K_cost: # cost check
         return False
@@ -76,6 +80,8 @@ def test_verify_cvrp():
         status = "PASS" if result == expected else "FAIL"
         print(f"{status}: {name} -> got {result}, expected {expected}")
 
+
+# claclulate total cost
 
 if __name__ == "__main__":
     test_verify_cvrp()
